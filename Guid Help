@@ -1,0 +1,33 @@
+Installation
+Preparation
+To install this package, you’ll need installed and working Composer.
+Head over to Official Composer Documentation to learn installation procedure for your OS.
+
+Installing package
+Install the package by running Composer in your project directory
+
+composer require denpa/laravel-bitcoinrpc "^1.2"
+or manually add following lines to the composer.json
+
+"require": {
+    "denpa/laravel-bitcoinrpc": "^1.2"
+}
+Registering Provider1
+Add Denpa\Bitcoin\Providers\ServiceProvider::class line to the providers list, somewhere near the bottom of your ./config/app.php file.
+
+'providers' => [
+    ...
+    Denpa\Bitcoin\Providers\ServiceProvider::class,
+];
+Registering Facade1
+Bitcoind facade provides a convenient way to make JSON-RPC calls from anywhere in your code. To register the facade, append it’s record to the aliases list in ./config/app.php as in the following example.
+
+'aliases' => [
+    ...
+    'Bitcoind' => Denpa\Bitcoin\Facades\Bitcoind::class,
+];
+Publishing config
+Publish the config file by running following command in your project directory.
+
+php artisan vendor:publish --provider="Denpa\Bitcoin\Providers\ServiceProvider"
+This step can be skipped for Laravel 5.5 or newer due to Auto-Discovery feature. ↩ ↩2
